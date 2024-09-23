@@ -1,5 +1,7 @@
 import 'package:ecominds/binding.dart';
+import 'package:ecominds/module/card_pick_game/card_pick_game.dart';
 import 'package:ecominds/module/mcq/view/mcq_view.dart';
+import 'package:ecominds/module/puzzle/view/Board.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialBinding: GlobalBinding(),
-      home: MCQView(),
+      home: MemoryGameScreen(),
     );
   }
 }
