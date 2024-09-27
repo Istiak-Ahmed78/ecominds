@@ -1,31 +1,46 @@
 import 'package:ecominds/binding.dart';
-import 'package:ecominds/module/card_pick_game/card_pick_game.dart';
+import 'package:ecominds/firebase_options.dart';
 import 'package:ecominds/module/home_page/view/home_page.dart';
-import 'package:ecominds/module/mcq/view/mcq_view.dart';
-import 'package:ecominds/module/puzzle/view/Board.dart';
-import 'package:ecominds/module/word_matching/view/word_matching.dart';
+import 'package:ecominds/module/login/view/login_view.dart';
+import 'package:ecominds/module/profile_page/view/profile_page.dart';
+import 'package:ecominds/module/registration/view/registration_view.dart';
+import 'package:ecominds/module/splash_screen/controller/splash_controller.dart';
+import 'package:ecominds/module/splash_screen/splash_controller.dart';
+import 'package:ecominds/module/splash_screen/splash_screen_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: 'Flutter Firebase Auth',
+      initialRoute: '/splash',
       initialBinding: GlobalBinding(),
-      home: LevelScreen(),
+      getPages: [
+        GetPage(
+            name: '/splash',
+            page: () => const SplashScreenView(),
+            binding: SplashBinding()),
+        GetPage(name: '/login', page: () => LoginScreen()),
+        GetPage(name: '/register', page: () => const RegistrationScreen()),
+        GetPage(name: '/profile', page: () => ProfileScreen()),
+        GetPage(
+            name: '/home',
+            page: () => const LevelScreen()), // Define HomeScreen
+      ],
+      debugShowCheckedModeBanner: false,
     );
   }
 }

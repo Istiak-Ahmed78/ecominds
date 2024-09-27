@@ -8,49 +8,47 @@ class MCQView extends GetView<McqController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Obx(() {
-        return SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          controller.mCQSectionModel.contenst ?? '',
-                          style: TextStyle(fontSize: 18),
-                        ),
+    return Obx(() {
+      return SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        controller.mCQSectionModel.contenst ?? '',
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
                   ),
-                  Column(
-                    children: controller.mCQSectionModel.macqList
-                            ?.asMap()
-                            .entries
-                            .map<Widget>((e) {
-                          return MCQWidget(
-                            mcq: e.value,
-                            questionInedex: e.key,
-                            givenAnserIndex: controller.answerIndexs[e.key],
-                          );
-                        }).toList() ??
-                        [],
-                  )
-                ],
-              ),
+                ),
+                Column(
+                  children: controller.mCQSectionModel.macqList
+                          ?.asMap()
+                          .entries
+                          .map<Widget>((e) {
+                        return MCQWidget(
+                          mcq: e.value,
+                          questionInedex: e.key,
+                          givenAnserIndex: controller.answerIndexs[e.key],
+                        );
+                      }).toList() ??
+                      [],
+                )
+              ],
             ),
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }
 

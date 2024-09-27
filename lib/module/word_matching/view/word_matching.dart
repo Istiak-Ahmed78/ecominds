@@ -45,84 +45,76 @@ class _MatchingGameScreenState extends State<MatchingGameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Matching Game'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  // Left side: List of interesting facts
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(facts.length, (index) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                // Left side: List of interesting facts
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(facts.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Draggable<int>(
+                        data: index,
+                        child: FactTile(
+                          fact: facts[index],
+                          matched: selectedMatches[index] != null,
+                        ),
+                        feedback: Material(
+                          child: FactTile(
+                            fact: facts[index],
+                            matched: false,
+                          ),
+                          elevation: 3.0,
+                        ),
+                        childWhenDragging: Opacity(
+                          opacity: 0.5,
+                          child: FactTile(
+                            fact: facts[index],
+                            matched: false,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+                // Right side: List of images
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: List.generate(images.length, (index) {
+                    return DragTarget<int>(
+                      onAccept: (factIndex) {
+                        checkMatch(factIndex, index);
+                      },
+                      builder: (context, acceptedData, rejectedData) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Draggable<int>(
-                            data: index,
-                            child: FactTile(
-                              fact: facts[index],
-                              matched: selectedMatches[index] != null,
-                            ),
-                            feedback: Material(
-                              child: FactTile(
-                                fact: facts[index],
-                                matched: false,
-                              ),
-                              elevation: 3.0,
-                            ),
-                            childWhenDragging: Opacity(
-                              opacity: 0.5,
-                              child: FactTile(
-                                fact: facts[index],
-                                matched: false,
-                              ),
-                            ),
+                          child: ImageTile(
+                            imagePath: images[index],
+                            matched: selectedMatches.contains(index),
                           ),
                         );
-                      }),
-                    ),
-                  ),
-                  // Right side: List of images
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: List.generate(images.length, (index) {
-                        return DragTarget<int>(
-                          onAccept: (factIndex) {
-                            checkMatch(factIndex, index);
-                          },
-                          builder: (context, acceptedData, rejectedData) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ImageTile(
-                                imagePath: images[index],
-                                matched: selectedMatches.contains(index),
-                              ),
-                            );
-                          },
-                        );
-                      }),
-                    ),
-                  ),
-                ],
-              ),
+                      },
+                    );
+                  }),
+                ),
+              ],
             ),
-            // Display points
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Points: $points',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
+          ),
+          // Display points
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Points: $points',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

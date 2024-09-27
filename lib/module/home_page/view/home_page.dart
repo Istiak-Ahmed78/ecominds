@@ -1,12 +1,24 @@
+import 'package:ecominds/module/level_control/view/level_control_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LevelScreen extends StatelessWidget {
+  const LevelScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Levels'),
         centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () => Get.toNamed('/profile'),
+            child: const CircleAvatar(
+              child: Icon(Icons.person),
+            ),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,6 +61,7 @@ class LevelScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
+                      Get.to(() => LevelControllerScreen());
                       // Handle level click here
                     },
                     child: Card(
