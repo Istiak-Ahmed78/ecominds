@@ -44,14 +44,6 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pop(context);
-                // Add navigation functionality here
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.account_circle),
               title: Text('Profile'),
               onTap: () {

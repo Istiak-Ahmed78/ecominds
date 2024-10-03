@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             binding: HomeBinding()), // Define HomeScreen
         GetPage(
             name: '/LevelControllerScreen',
-            page: () => LevelControllerScreen(),
+            page: () => const LevelControllerScreen(),
             binding: LevelControllerBinding()), // Define HomeScreen
       ],
       debugShowCheckedModeBanner: false,

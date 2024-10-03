@@ -1,5 +1,6 @@
 // lib/controllers/login_controller.dart
 import 'package:ecominds/models/mcq_model.dart';
+import 'package:ecominds/module/all_complete_con_screen/all_complete_con_screen.dart';
 import 'package:ecominds/module/home_page/models/tile_model.dart';
 import 'package:ecominds/module/mcq/controller/mcq_controller.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class HomeController extends GetxController {
           earnedPoints: [null, null, null, null]);
       Get.back();
     } else {
-      _showCompletionDialog(context);
+      Get.off(CongratulationsScreen());
     }
     update();
   }
