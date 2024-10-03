@@ -12,30 +12,18 @@ class MatchingGameScreen extends StatefulWidget {
 
 class _MatchingGameScreenState extends State<MatchingGameScreen> {
   List<String> facts = [];
-
   List<String> images = [];
+  Map<int, int> correctMatches = {0: 0, 1: 1, 2: 2, 3: 3};
 
-  Map<int, int> correctMatches = {
-    0: 0,
-    1: 1,
-    2: 2,
-  };
+  // Track if a fact was already tried and failed
+  List<bool> factTried = List<bool>.filled(4, false);
 
+  // Track selected matches with possibility of storing mismatches as null
   List<int?> selectedMatches = List<int?>.filled(4, null);
   int points = 0;
 
-  void checkMatch(int factIndex, int imageIndex) {
-    setState(() {
-      if (correctMatches[factIndex] == imageIndex) {
-        selectedMatches[factIndex] = imageIndex;
-        points++;
-      } else {
-        selectedMatches[factIndex] = null;
-      }
-    });
-  }
-
   final homeController = HomeController.to;
+
   void loadIntialData() {
     int currentTopicIndex = homeController.currentTopicIndex.value;
     facts = homeController.tileData[currentTopicIndex].matchingImageData.keys
@@ -48,6 +36,30 @@ class _MatchingGameScreenState extends State<MatchingGameScreen> {
   void initState() {
     loadIntialData();
     super.initState();
+  }
+
+  // Reset game logic
+  void resetGame() {
+    setState(() {
+      points = 0;
+      selectedMatches = List<int?>.filled(facts.length, null);
+      factTried = List<bool>.filled(facts.length, false); // Reset tried facts
+    });
+  }
+
+  // Check if the match is correct and assign points
+  void checkMatch(int factIndex, int imageIndex) {
+    print(factIndex);
+    print(imageIndex);
+    print(correctMatches[factIndex]);
+    setState(() {
+      if (correctMatches[factIndex] == imageIndex) {
+        selectedMatches[factIndex] = imageIndex;
+        points++; // Add point for correct match
+      } else {
+        factTried[factIndex] = true; // Mark the fact as tried and wrong
+      }
+    });
   }
 
   @override
@@ -69,27 +81,38 @@ class _MatchingGameScreenState extends State<MatchingGameScreen> {
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Draggable<int>(
-                          data: index,
-                          feedback: Material(
-                            elevation: 3.0,
-                            child: FactTile(
-                              fact: facts[index],
-                              matched: false,
-                            ),
-                          ),
-                          childWhenDragging: Opacity(
-                            opacity: 0.5,
-                            child: FactTile(
-                              fact: facts[index],
-                              matched: false,
-                            ),
-                          ),
-                          child: FactTile(
-                            fact: facts[index],
-                            matched: selectedMatches[index] != null,
-                          ),
-                        ),
+                        child:
+                            factTried[index] || selectedMatches[index] != null
+                                ? Opacity(
+                                    opacity: 0.5,
+                                    child: FactTile(
+                                      fact: facts[index],
+                                      matched: selectedMatches[index] != null,
+                                      isMismatched:
+                                          factTried[index], // Red if mismatched
+                                    ),
+                                  )
+                                : Draggable<int>(
+                                    data: index,
+                                    feedback: Material(
+                                      elevation: 3.0,
+                                      child: FactTile(
+                                        fact: facts[index],
+                                        matched: false,
+                                      ),
+                                    ),
+                                    childWhenDragging: Opacity(
+                                      opacity: 0.5,
+                                      child: FactTile(
+                                        fact: facts[index],
+                                        matched: false,
+                                      ),
+                                    ),
+                                    child: FactTile(
+                                      fact: facts[index],
+                                      matched: selectedMatches[index] != null,
+                                    ),
+                                  ),
                       ),
                     );
                   }),
@@ -127,14 +150,26 @@ class _MatchingGameScreenState extends State<MatchingGameScreen> {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                widget.onCompleteClick(1);
-                LavelController.to.addPointToALevel(3, 5);
-                HomeController.to.inputACompleteTopic(
-                    LavelController.to.levelScores, context);
-              },
-              child: const Text('Complete this course'))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  widget.onCompleteClick(1);
+                  LavelController.to.addPointToALevel(3, 5);
+                  HomeController.to.inputACompleteTopic(
+                      LavelController.to.levelScores, context);
+                },
+                child: const Text('Complete this course'),
+              ),
+              const SizedBox(width: 16),
+              // Reset Button
+              ElevatedButton(
+                onPressed: resetGame,
+                child: const Text('Reset Game'),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -144,15 +179,22 @@ class _MatchingGameScreenState extends State<MatchingGameScreen> {
 class FactTile extends StatelessWidget {
   final String fact;
   final bool matched;
+  final bool isMismatched;
 
-  const FactTile({super.key, required this.fact, required this.matched});
+  const FactTile(
+      {super.key,
+      required this.fact,
+      required this.matched,
+      this.isMismatched = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 112,
       decoration: BoxDecoration(
-        color: matched ? Colors.greenAccent : Colors.white,
+        color: matched
+            ? Colors.greenAccent
+            : (isMismatched ? Colors.redAccent : Colors.white),
         border: Border.all(color: Colors.black, width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -187,17 +229,16 @@ class ImageTile extends StatelessWidget {
         color: matched
             ? Colors.greenAccent
             : isMismatched
-                ? Colors.redAccent // Color for mismatched images
+                ? Colors.redAccent
                 : Colors.white,
       ),
-      // padding: const EdgeInsets.all(12),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.network(
           imagePath,
           height: 122,
           width: MediaQuery.of(context).size.width * 0.4,
-          fit: BoxFit.cover, // To ensure the image fits well
+          fit: BoxFit.cover,
         ),
       ),
     );
