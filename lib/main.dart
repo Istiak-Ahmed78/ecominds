@@ -1,15 +1,19 @@
 import 'package:ecominds/binding.dart';
 import 'package:ecominds/firebase_options.dart';
+import 'package:ecominds/module/home_page/home_binding.dart';
 import 'package:ecominds/module/home_page/view/home_page.dart';
+import 'package:ecominds/module/level_control/view/level_control_screen.dart';
 import 'package:ecominds/module/login/view/login_view.dart';
 import 'package:ecominds/module/profile_page/view/profile_page.dart';
+import 'package:ecominds/module/puzzle/view/puzzle2.dart';
 import 'package:ecominds/module/registration/view/registration_view.dart';
-import 'package:ecominds/module/splash_screen/controller/splash_controller.dart';
 import 'package:ecominds/module/splash_screen/splash_controller.dart';
 import 'package:ecominds/module/splash_screen/splash_screen_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'module/level_control/level_controller_binding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,9 +40,15 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/login', page: () => LoginScreen()),
         GetPage(name: '/register', page: () => const RegistrationScreen()),
         GetPage(name: '/profile', page: () => ProfileScreen()),
+        // GetPage(name: '/puzzle2', page: () => PuzzleGame()),
         GetPage(
             name: '/home',
-            page: () => const LevelScreen()), // Define HomeScreen
+            page: () => HomePage(),
+            binding: HomeBinding()), // Define HomeScreen
+        GetPage(
+            name: '/LevelControllerScreen',
+            page: () => LevelControllerScreen(),
+            binding: LevelControllerBinding()), // Define HomeScreen
       ],
       debugShowCheckedModeBanner: false,
     );
