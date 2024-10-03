@@ -20,16 +20,29 @@ class _MatchingGameScreenState extends State<MatchingGameScreen> {
 
   // Track selected matches with possibility of storing mismatches as null
   List<int?> selectedMatches = List<int?>.filled(4, null);
-  int points = 0;
+  double points = 0;
 
   final homeController = HomeController.to;
 
   void loadIntialData() {
+    points = 0;
     int currentTopicIndex = homeController.currentTopicIndex.value;
-    facts = homeController.tileData[currentTopicIndex].matchingImageData.keys
+
+    // Load facts and images as pairs
+    var factImagePairs = homeController
+        .tileData[currentTopicIndex].matchingImageData.entries
         .toList();
-    images = homeController.tileData[currentTopicIndex].matchingImageData.values
-        .toList();
+
+    // Separate facts and images into their respective lists
+    facts = factImagePairs.map((entry) => entry.key).toList();
+    images = factImagePairs.map((entry) => entry.value).toList();
+    images.shuffle();
+    // After shuffling, update correctMatches based on the new indices
+    correctMatches = {};
+    for (int i = 0; i < factImagePairs.length; i++) {
+      correctMatches[i] =
+          images.indexWhere((pair) => pair == factImagePairs[i].value);
+    }
   }
 
   @override
@@ -49,13 +62,10 @@ class _MatchingGameScreenState extends State<MatchingGameScreen> {
 
   // Check if the match is correct and assign points
   void checkMatch(int factIndex, int imageIndex) {
-    print(factIndex);
-    print(imageIndex);
-    print(correctMatches[factIndex]);
     setState(() {
       if (correctMatches[factIndex] == imageIndex) {
         selectedMatches[factIndex] = imageIndex;
-        points++; // Add point for correct match
+        points += 1.25; // Add point for correct match
       } else {
         factTried[factIndex] = true; // Mark the fact as tried and wrong
       }
@@ -235,6 +245,33 @@ class ImageTile extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.network(
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
+            if (loadingProgress == null) {
+              // Image is fully loaded
+              return child;
+            } else {
+              // Image is still loading, show progress indicator
+              return SizedBox(
+                height: 122,
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Center(
+                  child: Text(
+                      'Image loading: ${(loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1) * 100).toStringAsFixed(2)} %'),
+                  // child: CircularProgressIndicator(
+                  //   value: loadingProgress.expectedTotalBytes != null
+                  //       ? loadingProgress.cumulativeBytesLoaded /
+                  //           (loadingProgress.expectedTotalBytes ?? 1)
+                  //       : null,
+                  // ),
+                ),
+              );
+            }
+          },
+          errorBuilder: (context, error, stackTrace) {
+            // If there is an error while loading the image, you can show a placeholder or error widget.
+            return const Icon(Icons.error);
+          },
           imagePath,
           height: 122,
           width: MediaQuery.of(context).size.width * 0.4,

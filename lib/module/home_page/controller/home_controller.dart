@@ -21,7 +21,7 @@ class HomeController extends GetxController {
     changeTopicIndex(moduleIndex);
   }
 
-  void inputACompleteTopic(List<int?> earnedPoin, BuildContext context) {
+  void inputACompleteTopic(List<double?> earnedPoin, BuildContext context) {
     var previous = tileData[currentTopicIndex.value];
 
     tileData[currentTopicIndex.value] = TileModel(
@@ -33,6 +33,7 @@ class HomeController extends GetxController {
         videoLinks: previous.videoLinks,
         puzzleImageLink: previous.puzzleImageLink,
         matchingImageData: previous.matchingImageData,
+        puzzlePoint: previous.puzzlePoint,
         mcqData: previous.mcqData);
 
     if (currentTopicIndex.value + 1 != tileData.length) {
@@ -45,11 +46,12 @@ class HomeController extends GetxController {
           isUnlocked: true,
           mcqData: next.mcqData,
           puzzleImageLink: next.puzzleImageLink,
+          puzzlePoint: next.puzzlePoint,
           matchingImageData: next.matchingImageData,
           earnedPoints: [null, null, null, null]);
       Get.back();
     } else {
-      Get.off(CongratulationsScreen());
+      Get.off(() => const CongratulationsScreen());
     }
     update();
   }
@@ -70,11 +72,13 @@ class HomeController extends GetxController {
   RxList<List<bool>> lockUnlockStatuses = <List<bool>>[[]].obs;
   RxList<TileModel> tileData = [
     TileModel(
-        imagePath: 'assets/images/climate.png', // Placeholder image for module
+        imagePath:
+            'assets/images/climate-change.png', // Placeholder image for module
         title: 'Climate Basics',
         lessons: '4 Lessons',
         isUnlocked: true, // Unlocked
         earnedPoints: [null, null, null, null],
+        puzzlePoint: 5,
         videoLinks: [
           'https://www.youtube.com/watch?v=xk11DVaAjEA',
           'https://www.youtube.com/watch?v=2wgiy3Qo6gg',
@@ -158,10 +162,11 @@ class HomeController extends GetxController {
           ),
         ]),
     TileModel(
-        imagePath: 'assets/images/climate.png',
+        imagePath: 'assets/images/earth.png',
         title: 'Global Warming',
         lessons: '4 Lessons',
         isUnlocked: false, // Locked
+        puzzlePoint: 5,
         matchingImageData: {
           'Mapping Marine':
               'https://eoimages.gsfc.nasa.gov/images/imagerecords/149000/149163/microplastics_cygnss_2018098.jpg',
@@ -250,10 +255,11 @@ class HomeController extends GetxController {
           ),
         ]),
     TileModel(
-        imagePath: 'assets/images/climate.png',
+        imagePath: 'assets/images/global-warming.png',
         title: 'Possible Threats',
         lessons: '4 Lessons',
         isUnlocked: false, // Locked
+        puzzlePoint: 6,
         puzzleImageLink:
             'https://eoimages.gsfc.nasa.gov/images/imagerecords/152000/152982/iowaflooding_oli_20240624_th.jpg',
         earnedPoints: [
@@ -331,10 +337,11 @@ class HomeController extends GetxController {
           ),
         ]),
     TileModel(
-        imagePath: 'assets/images/climate.png',
+        imagePath: 'assets/images/healthy.png',
         title: 'Climate Action',
         lessons: '4 Lessons',
         isUnlocked: false, // Locked
+        puzzlePoint: 2,
         puzzleImageLink:
             'https://eoimages.gsfc.nasa.gov/images/imagerecords/152000/152203/FireSensefire_pho_2023282.jpg',
         earnedPoints: [

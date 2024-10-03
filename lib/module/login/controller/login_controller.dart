@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginController extends GetxController {
+  static LoginController get to => Get.find<LoginController>();
   // Controllers for input fields
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   // Observable variables
   var isLoading = false.obs;
@@ -15,6 +16,7 @@ class LoginController extends GetxController {
   var errorMessage = ''.obs;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? get user => _auth.currentUser;
 
   // Toggle password visibility
   void togglePasswordVisibility() {
@@ -73,11 +75,15 @@ class LoginController extends GetxController {
     }
   }
 
-  // Dispose controllers
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
+  void logOut() {
+    _auth.signOut();
   }
+
+  // Dispose controllers
+  // @override
+  // void onClose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.onClose();
+  // }
 }

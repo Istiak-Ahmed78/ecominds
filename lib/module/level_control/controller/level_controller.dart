@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class LavelController extends GetxController {
   static LavelController get to => Get.find<LavelController>();
 
-  RxList<int?> levelScores = <int?>[null, null, null, null].obs;
+  RxList<double?> levelScores = <double?>[null, null, null, null].obs;
   RxInt currentLevelIndex = 0.obs;
   void changeCurrentLEvelIndex(int l, bool isLocked, BuildContext context) {
     if (!isLocked) {
@@ -13,7 +13,7 @@ class LavelController extends GetxController {
     }
   }
 
-  void addPointToALevel(int levelIndex, int point) {
+  void addPointToALevel(int levelIndex, double point) {
     if (levelIndex + 1 <= levelScores.length) {
       levelScores[levelIndex] = point;
       if (levelIndex + 1 < levelScores.length) {
@@ -25,7 +25,7 @@ class LavelController extends GetxController {
   }
 
   void clearLevelScores() {
-    levelScores.value = <int?>[null, null, null, null];
+    levelScores.value = <double?>[null, null, null, null];
     update();
   }
 

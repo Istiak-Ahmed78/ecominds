@@ -6,7 +6,8 @@ class TileModel {
   final String lessons;
   final String puzzleImageLink;
   final bool isUnlocked;
-  final List<int?> earnedPoints;
+  final double puzzlePoint;
+  final List<double?> earnedPoints;
   final List<MCQModel> mcqData;
   final List<String> videoLinks;
   final Map<String, String> matchingImageData;
@@ -20,6 +21,7 @@ class TileModel {
     required this.earnedPoints,
     required this.mcqData,
     required this.videoLinks,
+    required this.puzzlePoint,
     required this.matchingImageData,
   });
 }

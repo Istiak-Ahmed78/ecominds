@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CongratulationsScreen extends GetView<HomeController> {
+  const CongratulationsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,13 +15,13 @@ class CongratulationsScreen extends GetView<HomeController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.celebration,
                 size: 100,
                 color: Colors.orange,
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Awesome!!',
                 style: TextStyle(
                   fontSize: 32,
@@ -27,8 +29,8 @@ class CongratulationsScreen extends GetView<HomeController> {
                   color: Colors.green,
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'You have cleared all the modules. Your quiz performance is great!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -36,29 +38,27 @@ class CongratulationsScreen extends GetView<HomeController> {
                   color: Colors.black54,
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   PerformanceCard(
                     label: 'Score Earned',
                     value:
-                        '${controller.tileData.fold(0, (previousValue, element) => (element.earnedPoints.fold(0, (previousValue, element) => (previousValue) + (element ?? 0))) + previousValue)} out of 100',
+                        '${controller.tileData.fold<double>(0, (previousValue, element) => (element.earnedPoints.fold<double>(0, (previousValue, element) => (previousValue) + (element ?? 0))) + previousValue)} out of 100',
                     icon: Icons.emoji_events_outlined,
                     iconColor: Colors.amber,
                   ),
                 ],
               ),
-              ...controller.tileData
-                  .map<Widget>((e) => ListTile(
-                        title: Text(e.title),
-                        subtitle: Text(
-                            'Total earned rewards: ${e.earnedPoints.fold(0, (previousValue, element) => (previousValue) + (element ?? 0))}'),
-                      ))
-                  .toList(),
-              SizedBox(height: 30),
-              Text(
+              ...controller.tileData.map<Widget>((e) => ListTile(
+                    title: Text(e.title),
+                    subtitle: Text(
+                        'Total earned rewards: ${e.earnedPoints.fold<double>(0, (previousValue, element) => (previousValue) + (element ?? 0))}'),
+                  )),
+              const SizedBox(height: 30),
+              const Text(
                 'You are now climate fighter to save the world!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -67,19 +67,20 @@ class CongratulationsScreen extends GetView<HomeController> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
                   Get.offNamed('/home');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  textStyle: TextStyle(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  textStyle: const TextStyle(
                     fontSize: 18,
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Go back to Home',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -98,7 +99,8 @@ class PerformanceCard extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
 
-  PerformanceCard({
+  const PerformanceCard({
+    super.key,
     required this.label,
     required this.value,
     required this.icon,
@@ -114,18 +116,18 @@ class PerformanceCard extends StatelessWidget {
           size: 40,
           color: iconColor,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             color: Colors.black54,
           ),

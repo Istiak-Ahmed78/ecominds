@@ -1,5 +1,7 @@
 import 'package:ecominds/module/home_page/controller/home_controller.dart';
 import 'package:ecominds/module/level_control/view/level_control_screen.dart';
+import 'package:ecominds/module/login/controller/login_controller.dart';
+import 'package:ecominds/module/profile_page/view/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +50,7 @@ class HomePage extends GetView<HomeController> {
               title: Text('Profile'),
               onTap: () {
                 Navigator.pop(context);
-                // Add navigation functionality here
+                Get.to(() => ProfileScreen(userData: LoginController.to.user));
               },
             ),
             ListTile(
@@ -59,14 +61,14 @@ class HomePage extends GetView<HomeController> {
                 // Add navigation functionality here
               },
             ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
-              onTap: () {
-                Navigator.pop(context);
-                // Add logout functionality here
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.logout),
+            //   title: Text('Logout'),
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     // Add logout functionality here
+            //   },
+            // ),
           ],
         ),
       ),
@@ -104,8 +106,7 @@ class HomePage extends GetView<HomeController> {
     return GestureDetector(
       onTap: isUnlocked
           ? () {
-              print(moduleIndex);
-              Get.toNamed('/LevelControllerScreen');
+              Get.toNamed('/LevelControllerScreen', arguments: title);
               HomeController.to.onEnterAModule(moduleIndex);
 
               // Handle level click here

@@ -1,9 +1,12 @@
 import 'package:ecominds/binding.dart';
 import 'package:ecominds/firebase_options.dart';
+import 'package:ecominds/module/hands_on_module/view/hands_on_module.dart';
 import 'package:ecominds/module/home_page/home_binding.dart';
 import 'package:ecominds/module/home_page/view/home_page.dart';
 import 'package:ecominds/module/level_control/view/level_control_screen.dart';
+import 'package:ecominds/module/login/login_binding.dart';
 import 'package:ecominds/module/login/view/login_view.dart';
+import 'package:ecominds/module/profile_page/profile_binding.dart';
 import 'package:ecominds/module/profile_page/view/profile_page.dart';
 import 'package:ecominds/module/puzzle/view/puzzle2.dart';
 import 'package:ecominds/module/registration/view/registration_view.dart';
@@ -37,9 +40,13 @@ class MyApp extends StatelessWidget {
             name: '/splash',
             page: () => const SplashScreenView(),
             binding: SplashBinding()),
-        GetPage(name: '/login', page: () => LoginScreen()),
+        GetPage(
+            name: '/login', page: () => LoginScreen(), binding: LoginBinding()),
         GetPage(name: '/register', page: () => const RegistrationScreen()),
-        GetPage(name: '/profile', page: () => ProfileScreen()),
+        // GetPage(
+        //     name: '/profile',
+        //     page: () => ProfileScreen(),
+        //     binding: ProfileBinding()),
         // GetPage(name: '/puzzle2', page: () => PuzzleGame()),
         GetPage(
             name: '/home',
@@ -50,6 +57,9 @@ class MyApp extends StatelessWidget {
             page: () => const LevelControllerScreen(),
             binding: LevelControllerBinding()), // Define HomeScreen
       ],
+      // home: HandsOnActivityScreen(
+      //   onCompleteClick: (i) {},
+      // ),
       debugShowCheckedModeBanner: false,
     );
   }

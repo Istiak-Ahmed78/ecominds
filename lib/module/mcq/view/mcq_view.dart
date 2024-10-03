@@ -44,17 +44,49 @@ class MCQView extends GetView<McqController> {
                           [],
                 ),
                 if (!controller.answerIndexs.any((e) => e == null)) ...[
-                  ElevatedButton(
-                      onPressed: () => controller.changeEditabilityState(false),
-                      child: const Text('Reveal answers')),
-                  Text('You got: ${controller.totalGottenNumber()} points'),
-                  ElevatedButton(
-                      onPressed: () {
-                        onCompleteClick(1);
-                        LavelController.to.addPointToALevel(
-                            1, controller.totalGottenNumber());
-                      },
-                      child: const Text('Proceed to next')),
+                  Text(
+                    'You got: ${controller.totalGottenNumber()} points',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.green),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 60,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            backgroundColor: Colors.green.shade100,
+                          ),
+                          onPressed: () =>
+                              controller.changeEditabilityState(false),
+                          child: const Text(
+                            'Reveal answers',
+                          )),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 60,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            backgroundColor: Colors.green.shade100,
+                          ),
+                          onPressed: () {
+                            onCompleteClick(1);
+                            LavelController.to.addPointToALevel(
+                                1, controller.totalGottenNumber().toDouble());
+                          },
+                          child: const Text('Proceed to next')),
+                    ),
+                  ),
                 ]
               ],
             ),

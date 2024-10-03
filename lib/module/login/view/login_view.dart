@@ -125,7 +125,10 @@ class LoginScreen extends GetView<LoginController> {
                 // Login Button
                 Obx(() {
                   return ElevatedButton(
-                    onPressed: () => controller.login(),
+                    onPressed: () {
+                      // Get.put(LoginController());
+                      controller.login();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white, // Button color
 

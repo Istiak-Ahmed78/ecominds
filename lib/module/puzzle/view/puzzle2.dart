@@ -183,12 +183,15 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = HomeController.to;
+    double pointToOptain = homeController
+        .tileData[homeController.currentTopicIndex.value].puzzlePoint;
     return image == null
         ? const Center(child: CircularProgressIndicator())
         : Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text('You will get 10 points on completing this.'),
+              Text('You will get $pointToOptain points on completing this.'),
               const SizedBox(
                 height: 20,
               ),
@@ -219,6 +222,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                 ),
                 itemCount: pieces.length,
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () => _movePiece(index),
@@ -241,15 +245,29 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                   );
                 },
               ),
+              const SizedBox(height: 10),
               if (showNextLevelNavigateOption)
                 Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        widget.onCompleteClick(2);
-                        LavelController.to.addPointToALevel(2, 5);
-                      },
-                      child: const Text('Navigate to next level')),
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 60,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            backgroundColor: Colors.green.shade100,
+                          ),
+                          onPressed: () {
+                            widget.onCompleteClick(2);
+
+                            LavelController.to
+                                .addPointToALevel(2, pointToOptain);
+                          },
+                          child: const Text('Navigate to next level')),
+                    ),
+                  ),
                 )
             ],
           );

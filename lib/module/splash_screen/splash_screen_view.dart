@@ -34,8 +34,9 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
-        child: Text('This is loading screen'),
+        child: Image.asset('assets/images/logo.png'),
       ),
     );
   }
