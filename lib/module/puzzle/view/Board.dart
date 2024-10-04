@@ -5,6 +5,8 @@ import 'package:ecominds/module/puzzle/widgets/MyTitle.dart';
 import 'package:flutter/material.dart';
 
 class PuzzleScreen extends StatefulWidget {
+  const PuzzleScreen({super.key});
+
   @override
   _PuzzleScreenState createState() => _PuzzleScreenState();
 }
@@ -13,7 +15,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   int move = 0;
 
-  static const duration = const Duration(seconds: 1);
+  static const duration = Duration(seconds: 1);
   int secondsPassed = 0;
   bool isActive = false;
   late Timer timer;
@@ -100,7 +102,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
             return Dialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)), //this right here
-              child: Container(
+              child: SizedBox(
                 height: 200,
                 child: Padding(
                   padding: const EdgeInsets.all(30.0),
@@ -108,7 +110,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "You Win!!",
                         style: TextStyle(fontSize: 20),
                       ),
@@ -118,12 +120,12 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text(
-                            "Close",
-                            style: TextStyle(color: Colors.white),
-                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
+                          ),
+                          child: const Text(
+                            "Close",
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       )

@@ -4,7 +4,7 @@ class ResetButton extends StatelessWidget {
   VoidCallback reset;
   String text;
 
-  ResetButton(this.reset, this.text);
+  ResetButton(this.reset, this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ResetButton extends StatelessWidget {
           borderRadius: new BorderRadius.circular(30.0),
         ),
       ),
-      child: Text("Reset"),
+      child: const Text("Reset"),
     );
   }
 }

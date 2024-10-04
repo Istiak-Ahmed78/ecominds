@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MemoryGameScreen extends StatefulWidget {
+  const MemoryGameScreen({super.key});
+
   @override
   _MemoryGameScreenState createState() => _MemoryGameScreenState();
 }
@@ -63,7 +67,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
 
     if (selectedCards.length == 2) {
       allowSelection = false;
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         _checkMatch();
       });
     }
@@ -89,16 +93,16 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Memory Game'),
+        title: const Text('Memory Game'),
       ),
       body: Center(
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
           ),
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           itemCount: emojis.length,
           itemBuilder: (context, index) {
             return GestureDetector(
@@ -108,7 +112,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
                 child: Center(
                   child: Text(
                     revealed[index] ? emojis[index] : "❓",
-                    style: TextStyle(fontSize: 30),
+                    style: const TextStyle(fontSize: 30),
                   ),
                 ),
               ),
@@ -122,7 +126,7 @@ class _MemoryGameScreenState extends State<MemoryGameScreen> {
             _shuffleCards();
           });
         },
-        child: Icon(Icons.refresh),
+        child: const Icon(Icons.refresh),
       ),
     );
   }

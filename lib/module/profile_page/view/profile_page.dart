@@ -1,6 +1,5 @@
 import 'package:ecominds/module/all_complete_con_screen/all_complete_con_screen.dart';
 import 'package:ecominds/module/home_page/controller/home_controller.dart';
-import 'package:ecominds/module/login/controller/login_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
         centerTitle: true, // Centers the title
       ),
       body: GetBuilder<HomeController>(builder: (homeController) {
@@ -30,24 +29,24 @@ class ProfileScreen extends StatelessWidget {
             crossAxisAlignment:
                 CrossAxisAlignment.center, // Centers children horizontally
             children: [
-              SizedBox(height: 20), // Spacer
+              const SizedBox(height: 20), // Spacer
               // Circle Avatar
               CircleAvatar(
                 radius: 60, // Size of the avatar
                 backgroundImage: NetworkImage(avatarUrl),
                 backgroundColor: Colors.grey.shade200, // Placeholder color
               ),
-              SizedBox(height: 20), // Spacer
+              const SizedBox(height: 20), // Spacer
               // User Name
               Text(
                 userData?.email ?? '(Email address not found)',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24, // Font size
                   fontWeight: FontWeight.bold, // Bold text
                 ),
               ),
 
-              SizedBox(height: 10), // Spacer
+              const SizedBox(height: 10), // Spacer
               // Earned Points
               Align(
                 child: PerformanceCard(

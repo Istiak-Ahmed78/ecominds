@@ -23,14 +23,14 @@ class HomwView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'SDG Solution',
         ),
         centerTitle: true,
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
               Container(
@@ -38,7 +38,7 @@ class HomwView extends StatelessWidget {
                 height: 250,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                         image: NetworkImage(
                             'https://img.freepik.com/free-vector/gradient-blur-colorful-phone-wallpaper-vector_53876-171597.jpg'),
                         fit: BoxFit.cover)),
@@ -53,19 +53,19 @@ class HomwView extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "Sabbir Ahmed",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 35,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Container(
                         height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 40),
+                        margin: const EdgeInsets.symmetric(horizontal: 40),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white),
@@ -77,14 +77,14 @@ class HomwView extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Expanded(
@@ -103,13 +103,13 @@ class HomwView extends StatelessWidget {
                                     image: NetworkImage(item["image"]),
                                     fit: BoxFit.cover)),
                             child: Transform.translate(
-                              offset: Offset(55, -58),
+                              offset: const Offset(55, -58),
                               child: Container(
                                 width: 30,
                                 // height: 30,
                                 clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(),
-                                child: SizedBox(),
+                                decoration: const BoxDecoration(),
+                                child: const SizedBox(),
                               ),
                               // child: InkWell(
                               //   onLongPress: () {},

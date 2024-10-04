@@ -1,5 +1,4 @@
 import 'package:ecominds/module/home_page/controller/home_controller.dart';
-import 'package:ecominds/module/level_control/view/level_control_screen.dart';
 import 'package:ecominds/module/login/controller/login_controller.dart';
 import 'package:ecominds/module/profile_page/view/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final tileData = controller.tileData;
-    final levelLockInformation = controller.lockUnlockStatuses;
 
     return Scaffold(
       appBar: AppBar(
@@ -50,16 +48,16 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              leading: const Icon(Icons.account_circle),
+              title: const Text('Profile'),
               onTap: () {
                 Navigator.pop(context);
                 Get.to(() => ProfileScreen(userData: LoginController.to.user));
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 Navigator.pop(context);
                 // Add navigation functionality here

@@ -178,7 +178,7 @@ class _ClimateBasicsScreenState extends State<ClimateBasicsScreen> {
 
   Widget _buildVideoItem(MyMetaDataModel? metaData, bool isCompleted) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.symmetric(vertical: 2),
       child: ListTile(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         tileColor: Colors.green.shade100,

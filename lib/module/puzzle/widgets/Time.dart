@@ -1,19 +1,17 @@
-
 import 'package:flutter/material.dart';
 
 class Time extends StatelessWidget {
-
   int secondsPassed;
 
-  Time(this.secondsPassed);
+  Time(this.secondsPassed, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
       child: Text(
-        "Time: ${secondsPassed}",
-        style: TextStyle(
+        "Time: $secondsPassed",
+        style: const TextStyle(
           fontSize: 18,
           decoration: TextDecoration.none,
           color: Colors.white,
