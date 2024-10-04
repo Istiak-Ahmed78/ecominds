@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;
+import 'package:ecominds/data/repo/nasa_api.dart';
 import 'package:ecominds/module/home_page/controller/home_controller.dart';
 import 'package:ecominds/module/level_control/controller/level_controller.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   List<ImagePiece> pieces = [];
   final int gridSize = 4; // 4x4 puzzle
   final homeController = HomeController.to;
-  late String imageUrl;
+  String? imageUrl;
   final Random random = Random();
   ui.Image? image;
 
@@ -33,17 +34,21 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   }
 
   Future<void> _loadImage() async {
-    imageUrl = homeController
-        .tileData[homeController.currentTopicIndex.value].puzzleImageLink;
-    final response = await http.get(Uri.parse(imageUrl));
-    final Uint8List bytes = response.bodyBytes;
-    final Completer<ui.Image> completer = Completer();
-    ui.decodeImageFromList(bytes, completer.complete);
-    image = await completer.future;
+    final data = await getPicturesOfTheDayForPuzzle();
 
-    _createPuzzlePieces();
-    _shufflePieces();
-    // shuffleOneTile();
+    if (data?.url != null) {
+      imageUrl = data!.url!;
+      setState(() {});
+      final response = await http.get(Uri.parse(imageUrl!));
+      final Uint8List bytes = response.bodyBytes;
+      final Completer<ui.Image> completer = Completer();
+      ui.decodeImageFromList(bytes, completer.complete);
+      image = await completer.future;
+
+      _createPuzzlePieces();
+      _shufflePieces();
+      // shuffleOneTile();
+    }
   }
 
   void _createPuzzlePieces() {
@@ -211,7 +216,9 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                     SizedBox(
                       height: 60,
                       width: 60,
-                      child: Image.network(imageUrl),
+                      child: imageUrl == null
+                          ? const Icon(Icons.image)
+                          : Image.network(imageUrl!),
                     )
                   ],
                 ),
