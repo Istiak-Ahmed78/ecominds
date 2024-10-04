@@ -1,14 +1,10 @@
 import 'package:ecominds/binding.dart';
 import 'package:ecominds/firebase_options.dart';
-import 'package:ecominds/module/hands_on_module/view/hands_on_module.dart';
 import 'package:ecominds/module/home_page/home_binding.dart';
 import 'package:ecominds/module/home_page/view/home_page.dart';
 import 'package:ecominds/module/level_control/view/level_control_screen.dart';
 import 'package:ecominds/module/login/login_binding.dart';
 import 'package:ecominds/module/login/view/login_view.dart';
-import 'package:ecominds/module/profile_page/profile_binding.dart';
-import 'package:ecominds/module/profile_page/view/profile_page.dart';
-import 'package:ecominds/module/puzzle/view/puzzle2.dart';
 import 'package:ecominds/module/registration/registration_binding.dart';
 import 'package:ecominds/module/registration/view/registration_view.dart';
 import 'package:ecominds/module/splash_screen/splash_controller.dart';

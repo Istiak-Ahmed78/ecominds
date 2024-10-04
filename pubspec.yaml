@@ -46,6 +46,12 @@ dependencies:
   any_link_preview: ^3.0.2
   flutter_link_previewer: ^3.2.2
   file_picker: ^8.1.2
+  geolocator: ^13.0.1
+  url_launcher: ^6.3.0
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  cached_network_image: ^3.4.1
+  location: ^6.0.2
 
 dev_dependencies:
   flutter_test:

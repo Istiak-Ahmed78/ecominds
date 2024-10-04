@@ -1,3 +1,5 @@
+import 'package:ecominds/module/current_location_s_image/current_location_s_image.dart';
+import 'package:ecominds/module/flood_view_data/flood_view_data.dart';
 import 'package:ecominds/module/home_page/controller/home_controller.dart';
 import 'package:ecominds/module/login/controller/login_controller.dart';
 import 'package:ecominds/module/profile_page/view/profile_page.dart';
@@ -60,6 +62,22 @@ class HomePage extends GetView<HomeController> {
               title: const Text('Settings'),
               onTap: () {
                 Navigator.pop(context);
+                // Add navigation functionality here
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.satellite),
+              title: const Text('Landsat 8 satellite image'),
+              onTap: () {
+                Get.to(() => const ImageScreen());
+                // Add navigation functionality here
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.water),
+              title: const Text('Check out current flood data'),
+              onTap: () {
+                Get.to(() => FloodEventScreen());
                 // Add navigation functionality here
               },
             ),
