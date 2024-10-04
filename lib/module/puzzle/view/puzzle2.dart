@@ -42,8 +42,8 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
     image = await completer.future;
 
     _createPuzzlePieces();
-    // _shufflePieces();
-    shuffleOneTile();
+    _shufflePieces();
+    // shuffleOneTile();
   }
 
   void _createPuzzlePieces() {

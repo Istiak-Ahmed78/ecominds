@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends GetView<LoginController> {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Initialize the LoginController
@@ -159,113 +161,113 @@ class LoginScreen extends GetView<LoginController> {
                 }),
                 const SizedBox(height: 30),
                 // OR Divider
-                const Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: Colors.white70,
-                        thickness: 1,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        "OR",
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: Colors.white70,
-                        thickness: 1,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                // Social Login Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Google Login
-                    GestureDetector(
-                      onTap: () {
-                        // Handle Google Login
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(12.0),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          FontAwesomeIcons.google,
-                          color: Colors.redAccent,
-                          size: 30,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    // Facebook Login
-                    GestureDetector(
-                      onTap: () {
-                        // Handle Facebook Login
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(12.0),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          FontAwesomeIcons.facebookF,
-                          color: Color(0xFF0A2463),
-                          size: 34,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    // Twitter Login
-                    GestureDetector(
-                      onTap: () {
-                        // Handle Twitter Login
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(12.0),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          FontAwesomeIcons.twitter,
-                          color: Color(0xFF0A2463),
-                          size: 34,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // const Row(
+                //   children: [
+                //     Expanded(
+                //       child: Divider(
+                //         color: Colors.white70,
+                //         thickness: 1,
+                //       ),
+                //     ),
+                //     Padding(
+                //       padding: EdgeInsets.symmetric(horizontal: 10.0),
+                //       child: Text(
+                //         "OR",
+                //         style: TextStyle(color: Colors.white70),
+                //       ),
+                //     ),
+                //     Expanded(
+                //       child: Divider(
+                //         color: Colors.white70,
+                //         thickness: 1,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(height: 30),
+                // // Social Login Buttons
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     // Google Login
+                //     GestureDetector(
+                //       onTap: () {
+                //         // Handle Google Login
+                //       },
+                //       child: Container(
+                //         padding: const EdgeInsets.all(12.0),
+                //         decoration: const BoxDecoration(
+                //           color: Colors.white,
+                //           shape: BoxShape.circle,
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.black26,
+                //               blurRadius: 5,
+                //               offset: Offset(0, 3),
+                //             ),
+                //           ],
+                //         ),
+                //         child: const Icon(
+                //           FontAwesomeIcons.google,
+                //           color: Colors.redAccent,
+                //           size: 30,
+                //         ),
+                //       ),
+                //     ),
+                //     const SizedBox(width: 20),
+                //     // Facebook Login
+                //     GestureDetector(
+                //       onTap: () {
+                //         // Handle Facebook Login
+                //       },
+                //       child: Container(
+                //         padding: const EdgeInsets.all(12.0),
+                //         decoration: const BoxDecoration(
+                //           color: Colors.white,
+                //           shape: BoxShape.circle,
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.black26,
+                //               blurRadius: 5,
+                //               offset: Offset(0, 3),
+                //             ),
+                //           ],
+                //         ),
+                //         child: const Icon(
+                //           FontAwesomeIcons.facebookF,
+                //           color: Color(0xFF0A2463),
+                //           size: 34,
+                //         ),
+                //       ),
+                //     ),
+                //     const SizedBox(width: 20),
+                //     // Twitter Login
+                //     GestureDetector(
+                //       onTap: () {
+                //         // Handle Twitter Login
+                //       },
+                //       child: Container(
+                //         padding: const EdgeInsets.all(12.0),
+                //         decoration: const BoxDecoration(
+                //           color: Colors.white,
+                //           shape: BoxShape.circle,
+                //           boxShadow: [
+                //             BoxShadow(
+                //               color: Colors.black26,
+                //               blurRadius: 5,
+                //               offset: Offset(0, 3),
+                //             ),
+                //           ],
+                //         ),
+                //         child: const Icon(
+                //           FontAwesomeIcons.twitter,
+                //           color: Color(0xFF0A2463),
+                //           size: 34,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 const SizedBox(height: 40),
                 // Register Navigation
                 Row(

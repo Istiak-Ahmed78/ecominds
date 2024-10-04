@@ -10,9 +10,20 @@ class RegisterController extends GetxController {
 
   // Observable variables
   var isLoading = false.obs;
+  var visibilityStatePass = false.obs;
+  var visibilityStateConPass = false.obs;
   var errorMessage = ''.obs;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  void changeVisibilityState() {
+    visibilityStatePass.value = !visibilityStatePass.value;
+    update();
+  }
+
+  void changeConfirmPassVisibilityState() {
+    visibilityStateConPass.value = !visibilityStateConPass.value;
+    update();
+  }
 
   // Registration function
   Future<void> register() async {

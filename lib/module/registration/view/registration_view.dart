@@ -14,6 +14,7 @@ class RegistrationScreen extends GetView<RegisterController> {
         return SingleChildScrollView(
           child: Container(
             width: double.infinity,
+            height: MediaQuery.of(context).size.height,
             padding:
                 const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
             decoration: BoxDecoration(
@@ -62,7 +63,8 @@ class RegistrationScreen extends GetView<RegisterController> {
                 // Password Field
                 TextField(
                   controller: controller.passwordController,
-                  obscureText: controller.isLoading.value ? false : true,
+                  obscureText:
+                      controller.visibilityStatePass.value ? false : true,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock, color: Colors.white),
@@ -72,14 +74,12 @@ class RegistrationScreen extends GetView<RegisterController> {
                     fillColor: Colors.white.withOpacity(0.3),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        controller.isLoading.value
+                        controller.visibilityStatePass.value
                             ? Icons.visibility
                             : Icons.visibility_off,
                         color: Colors.white,
                       ),
-                      onPressed: () {
-                        // Toggle password visibility if needed
-                      },
+                      onPressed: controller.changeVisibilityState,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0),
@@ -91,7 +91,8 @@ class RegistrationScreen extends GetView<RegisterController> {
                 // Confirm Password Field
                 TextField(
                   controller: controller.confirmPasswordController,
-                  obscureText: controller.isLoading.value ? false : true,
+                  obscureText:
+                      controller.visibilityStateConPass.value ? false : true,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     prefixIcon:
@@ -102,14 +103,12 @@ class RegistrationScreen extends GetView<RegisterController> {
                     fillColor: Colors.white.withOpacity(0.3),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        controller.isLoading.value
+                        controller.visibilityStateConPass.value
                             ? Icons.visibility
                             : Icons.visibility_off,
                         color: Colors.white,
                       ),
-                      onPressed: () {
-                        // Toggle password visibility if needed
-                      },
+                      onPressed: controller.changeConfirmPassVisibilityState,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0),

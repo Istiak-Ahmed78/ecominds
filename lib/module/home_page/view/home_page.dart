@@ -33,12 +33,16 @@ class HomePage extends GetView<HomeController> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
+                  color: Colors.blue,
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        'https://t4.ftcdn.net/jpg/03/86/82/73/360_F_386827376_uWOOhKGk6A4UVL5imUBt20Bh8cmODqzx.jpg',
+                      ))),
               child: Text(
-                'Drawer Header',
+                'Eco minds',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,

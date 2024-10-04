@@ -9,6 +9,7 @@ import 'package:ecominds/module/login/view/login_view.dart';
 import 'package:ecominds/module/profile_page/profile_binding.dart';
 import 'package:ecominds/module/profile_page/view/profile_page.dart';
 import 'package:ecominds/module/puzzle/view/puzzle2.dart';
+import 'package:ecominds/module/registration/registration_binding.dart';
 import 'package:ecominds/module/registration/view/registration_view.dart';
 import 'package:ecominds/module/splash_screen/splash_controller.dart';
 import 'package:ecominds/module/splash_screen/splash_screen_view.dart';
@@ -42,7 +43,10 @@ class MyApp extends StatelessWidget {
             binding: SplashBinding()),
         GetPage(
             name: '/login', page: () => LoginScreen(), binding: LoginBinding()),
-        GetPage(name: '/register', page: () => const RegistrationScreen()),
+        GetPage(
+            name: '/register',
+            page: () => const RegistrationScreen(),
+            binding: RegistrationBinding()),
         // GetPage(
         //     name: '/profile',
         //     page: () => ProfileScreen(),

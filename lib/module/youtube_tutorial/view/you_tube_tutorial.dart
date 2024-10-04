@@ -2,6 +2,7 @@ import 'package:ecominds/models/meta_model.dart';
 import 'package:ecominds/module/home_page/controller/home_controller.dart';
 import 'package:ecominds/module/level_control/controller/level_controller.dart';
 import 'package:ecominds/module/mcq/controller/mcq_controller.dart';
+import 'package:ecominds/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:flutter_link_previewer/flutter_link_previewer.dart';
@@ -145,17 +146,17 @@ class _ClimateBasicsScreenState extends State<ClimateBasicsScreen> {
                   ElevatedButton(
                     onPressed: () {
                       _youtubeController.pause();
-                      // if (currentScore != 8) {
-                      //   MyToast.showErrorToast(
-                      //       'Complete seeing all videos please');
-                      // } else {
-                      widget.onCompleteClick.call(0);
-                      LavelController.to.addPointToALevel(0, 8);
-                      int curentTopicIndex =
-                          HomeController.to.currentTopicIndex.value;
-                      McqController.to.loadMCQList(
-                          HomeController.to.tileData[curentTopicIndex].mcqData);
-                      // }
+                      if (currentScore != 8) {
+                        MyToast.showErrorToast(
+                            'Complete seeing all videos please');
+                      } else {
+                        widget.onCompleteClick.call(0);
+                        LavelController.to.addPointToALevel(0, 8);
+                        int curentTopicIndex =
+                            HomeController.to.currentTopicIndex.value;
+                        McqController.to.loadMCQList(HomeController
+                            .to.tileData[curentTopicIndex].mcqData);
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
@@ -187,7 +188,6 @@ class _ClimateBasicsScreenState extends State<ClimateBasicsScreen> {
                 ? Icons.check_circle
                 : Icons.play_circle),
         title: Text(metaData?.title ?? ''),
-        subtitle: Text('6s'),
         // trailing: Icon(Icons.play_circle),
         onTap: () {
           if (metaData?.videoID != null) {
